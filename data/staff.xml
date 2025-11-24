@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<company>
+    <staff id="1001">
+        <firstname>yong</firstname>
+        <lastname>mook kim</lastname>
+        <nickname>mkyong</nickname>
+        <salary currency="USD">100000</salary>
+    </staff>
+    <staff id="2001">
+        <firstname>low</firstname>
+        <lastname>yin fong</lastname>
+        <nickname>fong fong</nickname>
+        <salary currency="EUR">200000</salary>
+    </staff>
+    <staff id="3001">
+        <firstname>Solomon</firstname>
+        <lastname>Kebede</lastname>
+        <nickname>solo</nickname>
+        <salary currency="GBP">150000</salary>
+    </staff>
+    <staff id="3007">
+        <firstname>Bekele</firstname>
+        <lastname>Drake</lastname>
+        <nickname>Runner</nickname>
+        <salary currency="USD">75000</salary>
+    </staff>
+    <staff id="3011">
+        <firstname>Blake</firstname>
+        <lastname>Jack</lastname>
+        <nickname>lis</nickname>
+        <salary currency="YEN">100000</salary>
+    </staff>
+    <staff id="4001">
+        <firstname>Root</firstname>
+        <lastname>Book</lastname>
+        <nickname>buc</nickname>
+        <salary currency="BIRR">95000</salary>
+    </staff>
+    <staff id="3014">
+        <firstname>Kool</firstname>
+        <lastname>J</lastname>
+        <nickname>rap</nickname>
+        <salary currency="GBP">90000</salary>
+    </staff>
+    <staff id="5030">
+        <firstname>Eminem</firstname>
+        <lastname>Marshal</lastname>
+        <nickname>slim shady</nickname>
+        <salary currency="USD">500000</salary>
+    </staff>
+    <staff id="4019">
+        <firstname>Tupac</firstname>
+        <lastname>Shakur</lastname>
+        <nickname>Amaru</nickname>
+        <salary currency="USD">1000000</salary>
+    </staff>
+    <staff id="3052">
+        <firstname>Frank</firstname>
+        <lastname>Santara</lastname>
+        <nickname>Jazzish</nickname>
+        <salary currency="EUR">800000</salary>
+    </staff>
+    <staff id="3090">
+        <firstname>Bob</firstname>
+        <lastname>Marley</lastname>
+        <nickname>King of Rege</nickname>
+        <salary currency="GBP">1000200</salary>
+    </staff>
+</company>
