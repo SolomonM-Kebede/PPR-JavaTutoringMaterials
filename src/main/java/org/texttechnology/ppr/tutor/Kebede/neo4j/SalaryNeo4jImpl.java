@@ -10,6 +10,9 @@ import org.texttechnology.ppr.tutor.Kebede.interfaces.Salary;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Neo4j representation salary class
+ */
 public class SalaryNeo4jImpl implements Salary {
 
     private final SalaryImpl salary;

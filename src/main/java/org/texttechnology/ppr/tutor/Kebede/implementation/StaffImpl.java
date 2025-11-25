@@ -8,6 +8,10 @@ import org.neo4j.graphdb.Transaction;
 import org.texttechnology.ppr.tutor.Kebede.interfaces.Salary;
 import org.texttechnology.ppr.tutor.Kebede.interfaces.Staff;
 
+
+/**
+ * Staff Object representation
+ */
 public class StaffImpl implements Staff, Comparable<StaffImpl> {
 
     private String id;

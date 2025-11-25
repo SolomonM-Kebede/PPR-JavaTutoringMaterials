@@ -2,6 +2,10 @@ package org.texttechnology.ppr.tutor.Kebede.helper;
 
 import org.neo4j.graphdb.*;
 
+
+/**
+ * simple visualization of relation between two classes
+ */
 public class GraphVisualizer {
 
     public static void printStaffSalaryGraph(GraphDatabaseService db) {

@@ -7,6 +7,9 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 import org.texttechnology.ppr.tutor.Kebede.interfaces.Salary;
 
+/**
+ * Salary Object representation with all its attributes
+ */
 public class SalaryImpl implements Salary, Comparable<SalaryImpl> {
     private String salary;
     private String currency;

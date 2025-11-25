@@ -7,6 +7,9 @@ import org.texttechnology.ppr.tutor.Kebede.neo4j.StaffNeo4jImpl;
 
 import java.util.List;
 
+/**
+ * this class create staff and salary objects and provides CRUD operations as a central command
+ */
 public class StaffFactory {
 
     private final Neo4jConnection connection;

@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * this class manages transactions and Cypher
+ */
 public class Neo4jConnection {
 
     private static final Logger log = LoggerFactory.getLogger(Neo4jConnection.class);
@@ -180,7 +183,7 @@ public class Neo4jConnection {
         }
     }
 
-    // DELETE operations
+    // delete operations
 
     public void deleteStaffById(String id) {
         try (Transaction tx = db.beginTx()) {
@@ -209,7 +212,7 @@ public class Neo4jConnection {
         }
     }
 
-    // Utility methods
+    // utility methods
 
     public long countStaff() {
         try (Transaction tx = db.beginTx()) {

@@ -9,6 +9,10 @@ import org.texttechnology.ppr.tutor.Kebede.implementation.StaffImpl;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * Neo4j representation of Staff class
+ */
 public class StaffNeo4jImpl {
 
     private final StaffImpl staff;

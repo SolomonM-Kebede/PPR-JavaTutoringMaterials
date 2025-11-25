@@ -11,6 +11,10 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.*;
 import java.io.*;
 
+
+/**
+ * Parse xml file from the working directory and save to Neo4j
+ */
 public class XmlParser {
 
     private static final Logger log = LoggerFactory.getLogger(XmlParser.class);
