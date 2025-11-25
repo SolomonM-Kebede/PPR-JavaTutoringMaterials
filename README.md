@@ -17,49 +17,18 @@ A complete Java application that parses XML staff data, stores it in an embedded
 
 ## Project Structure
 
-```
-├── data/
-│       │ staff.xml
-src/
-├── main/
-│   ├── java/
-│   │   └── org/texttechnology/ppr/Kebede/
-│   │       ├── MainApplication.java
-│   │       ├── database/
-│   │       │   └── Neo4jConnection.java
-│   │       ├── handler/
-│   │       │   ├── RestHandler.java
-│   │       │   └── TemplateHandler.java
-│   │       ├── helper/
-│   │       │   └── XmlParser.java
-│               └── 
-│   │       ├── implementation/
-│   │       │   ├── SalaryImpl.java
-│   │       │   └── StaffImpl.java
-│   │       ├── neo4j/
-│   │       │   ├── SalaryNeo4jImpl.java
-│   │       │   └── StaffNeo4jImpl.java
-│   │       └── server/
-│   │           └── Main.java
-│   └── resources/
-│       ├── config.properties
-│       └── templates/staff.ftl
-│       
-```
+Mention here your UML diagram,
+or 
+explain the structure. 
+There are seven main packages in this project structure:....
 
 ## Setup Instructions
 
 ### 1. Place FreeMarker Templates
 
-Create the following directory structure in `src/main/resources/`:
+Create the templates directory structure in `src/main/resources/`:
 
-```
-src/main/resources/
-├── templates/
-│   ├── staff.ftl
-│   
-└── config.properties
-```
+
 
 ### 2. Configure Application
 
