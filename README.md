@@ -121,5 +121,5 @@ Ensure `staff.xml` is placed in `data/` directory.
 
 ## License
 
-This project is for educational purposes. © Solomon Mengesha kebede
-xml file source google and expanded for this purpose. 
+- This project is for educational purposes. © Solomon Mengesha kebede
+- xml file structure is from google and expanded for this purpose. 
