@@ -47,7 +47,7 @@ src/
 │       
 ```
 
-## 🛠️ Setup Instructions
+## Setup Instructions
 
 ### 1. Place FreeMarker Templates
 
