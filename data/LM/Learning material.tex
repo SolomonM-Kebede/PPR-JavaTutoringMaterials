@@ -1,0 +1,250 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{setspace}
+
+\geometry{margin=2.5cm}
+\setstretch{1.2}
+
+\title{Staff \& Salary Neo4j Project \\
+\large Educational Java Project for Teaching Architecture, Factories, and Graph Databases}
+\author{Prepared for Students (Group 8 PPR Tutorial): Prepared by Solomon}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+This project is a minimal but realistic Java application designed to teach students:
+
+\begin{itemize}
+    \item how to structure a Java project cleanly,
+    \item how to use a factory pattern to create domain objects,
+    \item how to interact with Neo4j using nodes and relationships,
+    \item how to separate model, persistence, factory, and REST layers,
+    \item how to build a small web interface using Javalin, FreeMarker, and jQuery.
+\end{itemize}
+
+The domain is intentionally simple: employees (Staff) with associated salary information (Salary).  
+Data is persisted in a Neo4j graph.
+
+\section{Project Overview}
+
+The project models:
+
+\begin{itemize}
+    \item \textbf{Staff} :an employee with ID, first name, last name, nickname.
+    \item \textbf{Salary} : salary amount and currency.
+\end{itemize}
+
+Each staff node in Neo4j has:
+
+\begin{itemize}
+    \item properties (id, first name, last name, nickname)
+    \item an outgoing relationship \texttt{HAS\_SALARY} to a Salary node
+\end{itemize}
+
+Students learn:
+
+\begin{itemize}
+    \item graph modeling,
+    \item node creation,
+    \item relationships,
+    \item REST endpoints,
+    \item template rendering (FTL),
+    \item AJAX requests (jQuery).
+\end{itemize}
+
+\section{Package Structure}
+
+The real project contains these core packages:
+
+\begin{itemize}
+    \item \textbf{database} :manages Neo4j connection
+    \item \textbf{interfaces}: Staff and Salary domain interfaces
+    \item \textbf{implementations} : Neo4j-based concrete implementations
+    \item \textbf{factory} : StaffFactory and SalaryFactory (factory pattern)
+    \item \textbf{rest}: REST routes using Javalin
+    \item \textbf{templates} : FreeMarker templates includes jQuery(it can be separate .js file created)
+\end{itemize}
+
+This structure demonstrates clean separation of concerns.
+
+\section{The \texttt{database} Package}
+
+\subsection{Neo4jConnection}
+
+This class wraps the embedded or file-based Neo4j database.
+
+\textbf{Responsibilities:}
+\begin{itemize}
+    \item open the database
+    \item expose a \texttt{GraphDatabaseService}
+    \item ensure safe shutdown
+\end{itemize}
+
+\textbf{Important Concept for Students:}
+A single connection object is passed into factories so they can create nodes and relationships.
+
+\section{The \texttt{model} Package}
+
+Contains the domain interfaces:
+
+\subsection{Staff}
+
+\begin{itemize}
+    \item \texttt{String getId()}
+    \item \texttt{String getFirstName()}
+    \item \texttt{String getLastName()}
+    \item \texttt{String getNickname()}
+    \item \texttt{Salary getSalary()}
+\end{itemize}
+
+\subsection{Salary}
+
+\begin{itemize}
+    \item \texttt{double getSalary()}
+    \item \texttt{String getCurrency()}
+\end{itemize}
+
+\section{The \texttt{impl} Package}
+
+Concrete Neo4j-backed implementations.
+
+\subsection{StaffNeo4jImpl}
+
+Represents a single Staff node in Neo4j.
+
+\textbf{Responsibilities:}
+
+\begin{itemize}
+    \item wrap a Neo4j \texttt{Node}
+    \item provide getters for staff properties
+    \item resolve linked Salary node
+\end{itemize}
+
+\subsection{SalaryNeo4jImpl}
+
+Represents a Salary node in Neo4j.
+
+\textbf{Responsibilities:}
+
+\begin{itemize}
+    \item wrap Neo4j node
+    \item return salary properties
+\end{itemize}
+
+\section{The \texttt{factory} Package}
+
+This is the architectural highlight of the project.
+
+\subsection{StaffFactory}
+
+\begin{itemize}
+    \item takes a \texttt{Neo4jConnection} in the constructor
+    \item can create new staff nodes
+    \item can attach salary to staff
+    \item can search by ID
+    \item returns \texttt{StaffNeo4jImpl} objects
+\end{itemize}
+
+\textbf{Key teaching point:}  
+Students learn dependency injection and factory responsibility.
+
+\subsection{SalaryFactory}
+
+Symmetric to StaffFactory, responsible for creating salary nodes.
+
+\section{REST Layer (Javalin)}
+
+Routes include:
+
+\begin{itemize}
+    \item \texttt{GET /staff} : renders staff table (FTL)
+    \item \texttt{GET /staff/\{id\}} :renders single staff (FTL)
+    \item \texttt{GET /api/staff} : returns JSON list of all staff
+    \item \texttt{GET /api/staff/\{id\}} : returns single staff as JSON
+\end{itemize}
+
+\section{Frontend: FreeMarker + jQuery}
+
+\subsection{FreeMarker Template (\texttt{staff.ftl})}
+
+Contains:
+
+\begin{itemize}
+    \item staff table
+    \item search bar
+    \item reset button
+\end{itemize}
+
+\subsection{jQuery Search}
+
+Example:
+
+\begin{verbatim}
+$.get("/api/staff/" + id, function(data) {
+    // replace table content
+});
+\end{verbatim}
+
+Students learn:
+
+\begin{itemize}
+    \item asynchronous requests
+    \item updating HTML dynamically
+\end{itemize}
+
+\section{Learning Goals}
+
+By completing this project, students learn:
+
+\subsection{Backend Concepts}
+
+\begin{itemize}
+    \item What a model is
+    \item What a factory is
+    \item Clean separation of layers
+    \item How graph databases work
+    \item Relationship creation and traversal
+\end{itemize}
+
+\subsection{Frontend Concepts}
+
+\begin{itemize}
+    \item Templating with FreeMarker
+    \item AJAX using jQuery
+    \item Rendering dynamic content
+\end{itemize}
+
+\subsection{Architectural Skills}
+
+\begin{itemize}
+    \item correct use of packages
+    \item avoiding mixing logic and UI
+    \item writing clean, testable code
+\end{itemize}
+
+\section{Conclusion}
+
+The project provides a complete mini-architecture using:
+
+\begin{itemize}
+    \item Java + Neo4j
+    \item Factory Pattern
+    \item Javalin REST API
+    \item FreeMarker frontend
+    \item AJAX search (jQuery)
+\end{itemize}
+
+
+
+\end{document}
