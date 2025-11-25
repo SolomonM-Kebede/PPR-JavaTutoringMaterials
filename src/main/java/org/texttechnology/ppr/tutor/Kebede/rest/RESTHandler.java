@@ -30,5 +30,6 @@ public class RESTHandler {
                 ctx.json(s);
             }
         });
+
     }
 }

@@ -14,6 +14,11 @@ public class SalaryImpl implements Salary, Comparable<SalaryImpl> {
     private String salary;
     private String currency;
 
+    /**
+     * Constuctor
+     * @param salary
+     * @param currency
+     */
     public SalaryImpl(String salary, String currency) {
         this.salary = salary;
         this.currency = currency;
