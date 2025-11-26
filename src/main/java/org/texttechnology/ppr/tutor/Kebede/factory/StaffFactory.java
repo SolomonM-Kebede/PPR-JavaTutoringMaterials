@@ -2,10 +2,12 @@ package org.texttechnology.ppr.tutor.Kebede.factory;
 
 import org.neo4j.graphdb.*;
 import org.texttechnology.ppr.tutor.Kebede.database.Neo4jConnection;
+import org.texttechnology.ppr.tutor.Kebede.implementation.SalaryImpl;
 import org.texttechnology.ppr.tutor.Kebede.implementation.StaffImpl;
 import org.texttechnology.ppr.tutor.Kebede.neo4j.StaffNeo4jImpl;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * this class create staff and salary objects and provides CRUD operations as a central command
@@ -72,4 +74,28 @@ public class StaffFactory {
     public long count() {
         return connection.countStaff();
     }
+    public SalaryImpl mapSalary(Node salaryNode) {
+        if (salaryNode == null) return null;
+
+        String salaryValue = (String) salaryNode.getProperty("salary", null);
+        String currency = (String) salaryNode.getProperty("currency", null);
+
+        return new SalaryImpl(salaryValue, currency);
+    }
+
+    public StaffImpl mapStaff(Map<String, Object> row) {
+        Node staffNode = (Node) row.get("s");
+        Node salaryNode = (Node) row.get("sal");
+
+        SalaryImpl salary = mapSalary(salaryNode);
+
+        return new StaffImpl(
+                (String) staffNode.getProperty("id"),
+                (String) staffNode.getProperty("firstName"),
+                (String) staffNode.getProperty("lastName"),
+                (String) staffNode.getProperty("nickname"),
+                salary
+        );
+    }
+
 }

@@ -5,6 +5,7 @@ import org.neo4j.dbms.api.DatabaseManagementServiceBuilder;
 import org.neo4j.graphdb.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.texttechnology.ppr.tutor.Kebede.factory.StaffFactory;
 import org.texttechnology.ppr.tutor.Kebede.implementation.SalaryImpl;
 import org.texttechnology.ppr.tutor.Kebede.implementation.StaffImpl;
 
@@ -22,6 +23,7 @@ public class Neo4jConnection {
 
     private final DatabaseManagementService managementService;
     private final GraphDatabaseService db;
+    private final StaffFactory staffFactory = new StaffFactory(this);
 
     public Neo4jConnection(String path) {
         File databaseDirectory = new File(path);
@@ -68,40 +70,21 @@ public class Neo4jConnection {
                     Map.of("id", id)
             );
 
-            if (result.hasNext()) {
-                Map<String, Object> row = result.next();
-                Node staffNode = (Node) row.get("s");
-                Node salaryNode = (Node) row.get("sal");
-
-                SalaryImpl salary = null;
-                if (salaryNode != null) {
-                    String salaryValue = (String) salaryNode.getProperty("salary", null);
-                    String currency = (String) salaryNode.getProperty("currency", null);
-                    salary = new SalaryImpl(salaryValue, currency);
-                }
-
-                StaffImpl staff = new StaffImpl(
-                        (String) staffNode.getProperty("id"),
-                        (String) staffNode.getProperty("firstName"),
-                        (String) staffNode.getProperty("lastName"),
-                        (String) staffNode.getProperty("nickname"),
-                        salary
-                );
-
-                tx.commit();
-                return staff;
-            }
-
+            StaffImpl staff = result.hasNext() ? staffFactory.mapStaff(result.next()) : null;
             tx.commit();
-            return null;
+            return staff;
+
         } catch (Exception e) {
             log.error("Failed to find staff by id: {}", id, e);
             throw new RuntimeException("Failed to find staff", e);
         }
     }
 
+
     public List<StaffImpl> findAllStaff() {
+
         List<StaffImpl> staffList = new ArrayList<>();
+
 
         try (Transaction tx = db.beginTx()) {
             Result result = tx.execute(
@@ -111,36 +94,19 @@ public class Neo4jConnection {
             );
 
             while (result.hasNext()) {
-                Map<String, Object> row = result.next();
-                Node staffNode = (Node) row.get("s");
-                Node salaryNode = (Node) row.get("sal");
-
-                SalaryImpl salary = null;
-                if (salaryNode != null) {
-                    String salaryValue = (String) salaryNode.getProperty("salary", null);
-                    String currency = (String) salaryNode.getProperty("currency", null);
-                    salary = new SalaryImpl(salaryValue, currency);
-                }
-
-                StaffImpl staff = new StaffImpl(
-                        (String) staffNode.getProperty("id"),
-                        (String) staffNode.getProperty("firstName"),
-                        (String) staffNode.getProperty("lastName"),
-                        (String) staffNode.getProperty("nickname"),
-                        salary
-                );
-
-                staffList.add(staff);
+                staffList.add(staffFactory.mapStaff(result.next()));
             }
 
             tx.commit();
             log.info("Found {} staff members", staffList.size());
             return staffList;
+
         } catch (Exception e) {
             log.error("Failed to find all staff", e);
             throw new RuntimeException("Failed to find all staff", e);
         }
     }
+
 
     // UPDATE operations
 
