@@ -31,6 +31,8 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+!**/src/main/resources/Prop.properties
+!**/src/main/resources/config.properties
 
 ### VS Code ###
 .vscode/
