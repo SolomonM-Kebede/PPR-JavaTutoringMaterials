@@ -23,6 +23,11 @@ public class SalaryImpl implements Salary, Comparable<SalaryImpl> {
         this.salary = salary;
         this.currency = currency;
     }
+    // Deserialization constructor for nested parsing
+    public SalaryImpl(JSONObject obj) {
+        this.salary = obj.optString("amount", "0.0");
+        this.currency = obj.optString("currency", "EUR");
+    }
 
     @Override
     public String getSalary() {

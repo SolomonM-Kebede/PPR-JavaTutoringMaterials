@@ -1,0 +1,10 @@
+{
+  "firstName": "Solomon",
+  "lastName": "Kebede",
+  "nickname": "Solo",
+  "id": "EMP-001",
+  "salary": {
+    "currency": "EUR",
+    "salary": "5500.0"
+  }
+}

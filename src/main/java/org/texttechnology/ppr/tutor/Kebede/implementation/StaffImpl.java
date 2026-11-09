@@ -29,6 +29,25 @@ public class StaffImpl implements Staff, Comparable<StaffImpl> {
         this.salary = salary;
     }
 
+    /**
+     * Deserializes a StaffImpl instance directly from an org.json.JSONObject.
+     */
+    public StaffImpl(JSONObject obj) {
+        this.id = obj.optString("id", null);
+        this.firstName = obj.optString("firstName", null);
+        this.lastName = obj.optString("lastName", null);
+        this.nickname = obj.optString("nickname", null);
+
+        // Recursively deserialize nested Salary if present
+        if (obj.has("salary") && !obj.isNull("salary")) {
+            JSONObject salaryJson = obj.getJSONObject("salary");
+            // Instantiate using SalaryImpl's JSONObject constructor
+            this.salary = new SalaryImpl(salaryJson);
+        } else {
+            this.salary = null;
+        }
+    }
+
     @Override
     public String getId() {
         return id;
@@ -99,6 +118,7 @@ public class StaffImpl implements Staff, Comparable<StaffImpl> {
         }
         return obj;
     }
+
 
     void setStaff(String staff) {
         this.staff = staff;
